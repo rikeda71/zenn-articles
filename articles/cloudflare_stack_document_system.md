@@ -3,7 +3,7 @@ title: "Cloudflare で作る LLM Friendry なドキュメント基盤"
 emoji: "📓"
 type: "tech"
 topics: ["cloudflare", "rag", "llm", "astro", "document"]
-published: false
+published: true
 ---
 
 ## Introduction
