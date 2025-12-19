@@ -228,6 +228,6 @@ RAG の運用に Cloudflare AI Search を利用していますが、下記のよ
 
 ## Summary
 
-Markdown で執筆し、Cloudflare で安くホスティングすることで LLM friendry なドキュメント基盤を実現しました。
+Markdown で執筆し、Cloudflare で安くホスティング・RAG を搭載することで LLM Friendry なドキュメント基盤を実現しました。
 
 利用方法はリポジトリの README に記載していますので、よければ試していただけますと幸いです。
