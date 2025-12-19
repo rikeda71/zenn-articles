@@ -1,11 +1,12 @@
 ---
-title: "Cloudflare で作る LLM friendry なドキュメント基盤"
+title: "Cloudflare で作る LLM Friendry なドキュメント基盤"
 emoji: "📓"
 type: "tech"
 topics: ["cloudflare", "rag", "llm", "astro", "document"]
-published: false
+published: true
 ---
 
+## Introduction
 
 AI コーディングや Spec Drive Development の発展に伴い、作成した Design Doc などのドキュメントを LLM に読み込ませる機会が増えました。
 
@@ -14,7 +15,7 @@ AI コーディングや Spec Drive Development の発展に伴い、作成し�
 Markdown でドキュメントを管理することで上述の問題は解決するものの、特に非エンジニアから見たときに human readable ではありません。
 Markdown を何かしらの方法で整形して表示したドキュメント基盤をホスティングすることで人にとっても読んでもらいやくなると考えます。
 
-本記事では、Cloudflare をフル活用したドキュメント基盤を紹介します。
+そこで、Cloudflare をフル活用した LLM Friendry なドキュメント基盤を作ったので紹介します。
 
 https://github.com/rikeda71/cloudflare-stack-docs
 
@@ -22,11 +23,10 @@ https://github.com/rikeda71/cloudflare-stack-docs
 
 次のようなアーキテクチャになっています。
 
-以下の要件を満たしています。
-
+- Markdown で執筆
+- Cloudflare Workers にホスティング
 - 認可機能の搭載
 - RAG を使った質問回答生成
-
 
 ```mermaid
 graph LR
@@ -128,7 +128,7 @@ R2 を利用するため、クレジットカードの登録は必要になり�
 
 ## Tips
 
-### RAG Search UI の実装について
+### RAG で質問する UI の実装について
 
 Starlight は Markdown によるドキュメントを描画するのに特化したテーマとなっています。
 
@@ -228,6 +228,6 @@ RAG の運用に Cloudflare AI Search を利用していますが、下記のよ
 
 ## Summary
 
-Markdown で執筆し、Cloudflare で安くホスティングすることで LLM friendry なドキュメント基盤を実現しました。
+Markdown で執筆し、Cloudflare で安くホスティング・RAG を搭載することで LLM Friendry なドキュメント基盤を実現しました。
 
 利用方法はリポジトリの README に記載していますので、よければ試していただけますと幸いです。
