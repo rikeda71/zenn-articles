@@ -1,5 +1,11 @@
 {
+  "scripts": {
+    "textlint": "textlint",
+    "textlint:fix": "textlint --fix"
+  },
   "dependencies": {
-    "zenn-cli": "^0.1.157"
+    "textlint": "^15.5.0",
+    "textlint-rule-preset-ja-technical-writing": "^12.0.2",
+    "zenn-cli": "^0.2.11"
   }
 }
