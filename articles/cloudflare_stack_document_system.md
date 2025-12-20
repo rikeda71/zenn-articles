@@ -1,5 +1,5 @@
 ---
-title: "Cloudflare で作る LLM Friendry なドキュメント基盤"
+title: "Cloudflare × Astro で作る LLM friendly なドキュメント基盤"
 emoji: "📓"
 type: "tech"
 topics: ["cloudflare", "rag", "llm", "astro", "document"]
