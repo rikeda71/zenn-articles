@@ -3,7 +3,7 @@ title: "drizzle のスキーマ定義からドキュメントを自動生成す�
 emoji: "🌧️"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [drizzle, database, typescript, orm]
-published: false
+published: true
 ---
 
 drizzle は TypeScript でスキーマ定義が記述できることや軽量であることから注目されている ORM です。
