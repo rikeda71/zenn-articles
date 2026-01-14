@@ -1,6 +1,6 @@
 ---
 title: "drizzle のスキーマ定義からドキュメントを自動生成するツール drizzle-docs-generator"
-emoji: "🦁"
+emoji: "🌧️"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [drizzle, database, typescript, orm]
 published: false
@@ -13,12 +13,19 @@ drizzle のスキーマ定義から Markdown 形式のドキュメント及び D
 
 https://github.com/rikeda71/drizzle-docs-generator
 
-## 課題感
+## 課題感：スキーマ定義とドキュメントのズレによる問題
 
-drizzle はスキーマ定義からドキュメントを生成する方法を備えていません。
+drizzle などの ORM でスキーマ定義を管理していると、次のような経験をよくするのではないでしょうか。
 
-drizzle-kit を使うことで DDL を生成できるため、DDL を経由して、間接的にスキーマ定義からドキュメントを作成可能です。
-しかし、comment 句に対応していないため、カラムやテーブルの説明を確認したい場合、別途用意したドキュメントや drizzle のスキーマ定義上の JSDoc を確認する必要があります。
+- スキーマ変更したのに、ドキュメント更新し忘れた
+- JSDoc に書いたコメントを、Notion や Confluence などの wiki にも書き直している
+- ドキュメントではなく、スキーマ定義のコードを読まないとカラム定義の詳細がわからない
+
+スキーマ定義とドキュメントを二重管理することで、こういった事象は多々起こりえます。
+
+drizzle には公式のドキュメント生成機能がありません。
+また、drizzle-kit の DDL 生成も comment 句に非対応です。
+結果、DDL からドキュメントを作成しても、カラム定義の詳細を確認する羽目になります。
 
 :::message
 comment 句への対応の要望は Issue に起票されています。
@@ -34,6 +41,8 @@ https://orm.drizzle.team/roadmap
 ## drizzle-docs-generator の紹介
 
 [drizzle-docs-generator](https://github.com/rikeda71/drizzle-docs-generator) は drizzle のスキーマ定義からカラムやテーブルに関する説明を含めたドキュメントを自動生成でき、上述のような問題を解決できます。
+
+CI/CD パイプライン（GitHub Actions など）に組み込むことで、スキーマ変更時に自動的にドキュメントを更新し、スキーマ定義とドキュメントのズレを根本的に解消できます。
 
 npm からインストールできます。
 
@@ -59,16 +68,16 @@ $ npm install -g drizzle-docs-generator
 $ drizzle-docs generate ./src/db/schema.ts -d mysql -f markdown -o ./docs
 ```
 
-[schema.ts](https://github.com/rikeda71/drizzle-docs-generator/blob/main/examples/mysql/schema.ts) を対象にコマンドを実行した場合、次のようなディレクトリが生成されます。
+[schema.ts](https://github.com/rikeda71/drizzle-docs-generator/blob/main/examples/mysql/v0/schema.ts) を対象にコマンドを実行した場合、次のようなディレクトリが生成されます。
 
-https://github.com/rikeda71/drizzle-docs-generator/tree/main/examples/mysql/markdown
+https://github.com/rikeda71/drizzle-docs-generator/tree/main/examples/mysql/v0/markdown
 
 コマンドで指定したパスにドキュメント用のディレクトリを作成し、`README.md` にテーブル一覧および ER 図が記載されます。
 ER 図は mermaid 形式で記載されるため、GitHub などで閲覧可能です。
 また、同一ディレクトリ上にテーブルごとのドキュメントである `<tablename>.md` が生成されます。
 このドキュメントにはカラム一覧、制約、インデックス、drizzle で設定した relation に基づく他テーブルとの関係が記されます。
 
-[schema.ts](https://github.com/rikeda71/drizzle-docs-generator/blob/main/examples/mysql/schema.ts) のように JSDoc をスキーマ定義を書くことで、JSDoc に記載したコメントをドキュメントに記載する仕組みとなっています。
+[schema.ts](https://github.com/rikeda71/drizzle-docs-generator/blob/main/examples/mysql/v0/schema.ts) のように JSDoc をスキーマ定義を書くことで、JSDoc に記載したコメントをドキュメントに記載する仕組みとなっています。
 
 ```ts:schema.ts
 /** User accounts table storing basic user information */
@@ -127,13 +136,13 @@ DBML はテーブル定義を記述するための DSL です。
 $ drizzle-docs generate ./src/db/schema.ts -d mysql -f dbml -o schema.dbml
 ```
 
-[schema.ts](https://github.com/rikeda71/drizzle-docs-generator/blob/main/examples/mysql/schema.ts) を対象にコマンドを実行した場合、次のようなファイルが生成されます。
+[schema.ts](https://github.com/rikeda71/drizzle-docs-generator/blob/main/examples/mysql/v0/schema.ts) を対象にコマンドを実行した場合、次のようなファイルが生成されます。
 
 https://github.com/rikeda71/drizzle-docs-generator/blob/main/examples/mysql/schema.dbml
 
 この DBML を dbdiagram.io にインポートすると、ER 図とテーブル定義を視覚的に確認できます。
 
-![dbdiagram.io での表示例](/images/drizzle_docs_generator/1.gif)
+![dbdiagram.io での表示例](/images/drizzle_docs_generator/1.png)
 
 Markdown 形式と同じく MySQL, PostgreSQL, SQLite のスキーマ定義 及び 複数ファイルによるスキーマ定義に対応しています。
 
@@ -144,9 +153,12 @@ v1.0 では relation 定義の方法が v0 から変更されています。
 
 https://orm.drizzle.team/docs/relations-v1-v2
 
-
 drizzle-docs-generator ではどちらの relation 定義にも対応しています。
 そのため、どちらのバージョンを利用されていてもご利用いただけます。
+
+GitHub リポジトリ上にはそれぞれの DB（MySQL, PostgreSQL, SQLite）に対応する v0 系・v1 系のスキーマ定義および生成されたドキュメントの例を掲載しています。
+
+https://github.com/rikeda71/drizzle-docs-generator/tree/main/examples
 
 ## 実装について
 
@@ -165,4 +177,4 @@ drizzle-docs-generator ではどちらの relation 定義にも対応してい�
 drizzle のスキーマ定義からドキュメントを生成できる drizzle-docs-generator を紹介しました。
 drizzle を利用されていて、スキーマ定義とドキュメントの同期にお困りの方はぜひご利用ください！
 
-star や PR, Issue などもよければお願いします。
+star や PR、Issue などもよければお願いします。
