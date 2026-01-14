@@ -138,7 +138,7 @@ $ drizzle-docs generate ./src/db/schema.ts -d mysql -f dbml -o schema.dbml
 
 [schema.ts](https://github.com/rikeda71/drizzle-docs-generator/blob/main/examples/mysql/v0/schema.ts) を対象にコマンドを実行した場合、次のようなファイルが生成されます。
 
-https://github.com/rikeda71/drizzle-docs-generator/blob/main/examples/mysql/schema.dbml
+https://github.com/rikeda71/drizzle-docs-generator/blob/main/examples/mysql/v0/schema.dbml
 
 この DBML を dbdiagram.io にインポートすると、ER 図とテーブル定義を視覚的に確認できます。
 
