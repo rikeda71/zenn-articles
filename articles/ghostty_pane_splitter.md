@@ -3,13 +3,14 @@ title: "Ghostty の pane 分割を CLI で自動化するツール ghostty-pane-
 emoji: "👻"
 type: "tech"
 topics: ["ghostty", "rust", "cli", "terminal"]
-published: false
+published: true
+published_at: 2026-03-19 07:00
 ---
 
 [Ghostty](https://ghostty.org/) は軽量かつ設定が簡単で、最近は [Claude Code](https://code.claude.com/) や [Codex CLI](https://github.com/openai/codex) などの AI Coding Agent を動かすのによく使われています。
 Ghostty で pane を分割する場合、決まったフォーマットに分割したい場合でも、毎回手動で分割する必要があります。
 
-この課題に対して、すでに[いくつかのアプローチ](#参考文献)が紹介されています。n 番煎じではありますが、macOS / Linux の両方で動作する CLI ツール「ghostty-pane-splitter」を Rust で作ったので紹介します。
+この課題に対して、すでに[いくつかのアプローチ](#参考文献)が紹介されています。二番煎じではありますが、macOS / Linux の両方で動作する CLI ツール「ghostty-pane-splitter」を Rust で作ったので紹介します。
 
 https://github.com/rikeda71/ghostty-pane-splitter
 
