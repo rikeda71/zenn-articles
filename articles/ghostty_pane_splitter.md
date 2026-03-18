@@ -1,5 +1,5 @@
 ---
-title: "Ghostty の pane 分割を CLI で自動化するツール ghostty-pane-splitter を作った"
+title: "Ghostty の pane 分割をコマンド一発で自動化する CLI ツールを作った"
 emoji: "👻"
 type: "tech"
 topics: ["ghostty", "rust", "cli", "terminal"]
@@ -8,9 +8,9 @@ published_at: 2026-03-19 07:00
 ---
 
 [Ghostty](https://ghostty.org/) は軽量かつ設定が簡単で、最近は [Claude Code](https://code.claude.com/) や [Codex CLI](https://github.com/openai/codex) などの AI Coding Agent を動かすのによく使われています。
-Ghostty で pane を分割する場合、決まったフォーマットに分割したい場合でも、毎回手動で分割する必要があります。
+例えば「左に Claude Code、右上にエディタ、右下に dev server」のようなレイアウトを毎回手動で分割するのは面倒です。
 
-この課題に対して、すでに[いくつかのアプローチ](#参考文献)が紹介されています。二番煎じではありますが、macOS / Linux の両方で動作する CLI ツール「ghostty-pane-splitter」を Rust で作ったので紹介します。
+この課題に対して、すでに[いくつかのアプローチ](#参考文献)が紹介されています。ただし macOS 限定のものが多かったため、macOS / Linux の両方で動作する CLI ツール「ghostty-pane-splitter」を Rust で作りました。
 
 https://github.com/rikeda71/ghostty-pane-splitter
 
@@ -18,11 +18,17 @@ https://github.com/rikeda71/ghostty-pane-splitter
 
 数値、グリッド、カスタムの3種類のレイアウト指定で pane 分割を自動化できます。
 
-| 指定方法 | デモ |
-| --- | --- |
-| 数値指定 (`ghostty-pane-splitter 4`) | ![number](/images/ghostty_pane_splitter/demo-number.gif) |
-| グリッド指定 (`ghostty-pane-splitter 2x3`) | ![grid](/images/ghostty_pane_splitter/demo-grid.gif) |
-| カスタム指定 (`ghostty-pane-splitter 1,3`) | ![custom](/images/ghostty_pane_splitter/demo-custom.gif) |
+**数値指定** (`ghostty-pane-splitter 4`)
+
+![number](/images/ghostty_pane_splitter/demo-number.gif)
+
+**グリッド指定** (`ghostty-pane-splitter 2x3`)
+
+![grid](/images/ghostty_pane_splitter/demo-grid.gif)
+
+**カスタム指定** (`ghostty-pane-splitter 1,3`)
+
+![custom](/images/ghostty_pane_splitter/demo-custom.gif)
 
 ## インストール
 
@@ -126,17 +132,13 @@ ghostty-pane-splitter 2,1,3
 
 ## 実装について
 
-ghostty-pane-splitter は [enigo](https://github.com/enigo-rs/enigo) というクレートを使ってキーボード入力をシミュレートし、Ghostty の pane 分割を自動化しています。
-
-https://github.com/enigo-rs/enigo
-
-処理の流れは以下の通りです。
+ghostty-pane-splitter は [enigo](https://github.com/enigo-rs/enigo) というクレートを使ってキーボード入力をシミュレートし、Ghostty の pane 分割を自動化しています。処理の流れは以下の通りです。
 
 1. Ghostty の設定ファイルを読み取り、pane 分割に必要なキーバインドを取得する
 2. 指定されたレイアウトに応じて必要な分割操作の順序を計算する
 3. enigo を通じてキーボード入力をシミュレートし、Ghostty のキーバインドを順番に発火させる
 
-enigo は macOS では [Core Graphics Event API](https://developer.apple.com/documentation/coregraphics/cgevent)、Linux では [libxdo (xdotool)](https://github.com/jordansissel/xdotool) を利用してキーストロークを送信します。このクレートが OS ごとの差異を吸収してくれるため、同一のコードベースで macOS / Linux の両方に対応できています。
+enigo は macOS では [Core Graphics Event API](https://developer.apple.com/documentation/coregraphics/cgevent)、Linux では [xdotool](https://github.com/jordansissel/xdotool) を利用してキーストロークを送信します。このクレートが OS ごとの差異を吸収してくれるため、同一のコードベースで macOS / Linux の両方に対応できています。
 
 :::message
 Windows は Ghostty 自体が未サポートのため、ghostty-pane-splitter も Windows には対応していません。
@@ -152,4 +154,4 @@ star や PR、Issue などもお待ちしています。
 
 https://zenn.dev/tackeyy/articles/deb12cbcb0f183
 
-https://zenn.dev/meijin/articles/ghostty-pane-split-script
+https://zenn.dev/meijin/articles/ghostty-1_3-apple-script
