@@ -10,7 +10,7 @@ published_at: 2026-03-19 07:00
 [Ghostty](https://ghostty.org/) は軽量かつ設定が簡単で、最近は [Claude Code](https://code.claude.com/) や [Codex CLI](https://github.com/openai/codex) などの AI Coding Agent を動かすのによく使われています。
 Ghostty は pane 分割機能を備えていますが、分割のたびにショートカットキーを押す必要があります。例えば「左に Claude Code、右上にエディタ、右下に dev server」のようなレイアウトを毎回手動で組み立てるのは面倒です。
 
-この課題に対して、すでに[いくつかのアプローチ](#参考文献)が紹介されています。ただし macOS 限定のものが多かったため、macOS / Linux の両方で動作する CLI ツール「ghostty-pane-splitter」を Rust で作りました。
+この課題に対して、すでに[いくつかのアプローチ](#参考文献)が紹介されています。二番煎じではありますが、macOS / Linux の両方で動作する CLI ツール「ghostty-pane-splitter」を作りました。
 
 https://github.com/rikeda71/ghostty-pane-splitter
 
