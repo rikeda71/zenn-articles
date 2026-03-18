@@ -49,14 +49,6 @@ curl -fsSL https://github.com/rikeda71/ghostty-pane-splitter/releases/latest/dow
 sudo mv ghostty-pane-splitter /usr/local/bin/
 ```
 
-### ソースからビルド
-
-```bash
-git clone https://github.com/rikeda71/ghostty-pane-splitter.git
-cd ghostty-pane-splitter
-cargo install --path .
-```
-
 ## 使い方と設定
 
 ### Ghostty の設定
