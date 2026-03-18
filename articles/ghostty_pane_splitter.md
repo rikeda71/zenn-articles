@@ -9,7 +9,7 @@ published: false
 [Ghostty](https://ghostty.org/) は軽量かつ設定が簡単で、最近は [Claude Code](https://code.claude.com/) や [Codex CLI](https://github.com/openai/codex) などの AI Coding Agent を動かすのによく使われています。
 Ghostty で pane を分割する場合、決まったフォーマットに分割したい場合でも、毎回手動で分割する必要があります。
 
-この課題に対して、すでに[いくつかのアプローチ](#参考文献)が紹介されています。n番煎じではありますが、macOS / Linux の両方で動作する CLI ツール「ghostty-pane-splitter」を Rust で作ったので紹介します。
+この課題に対して、すでに[いくつかのアプローチ](#参考文献)が紹介されています。n 番煎じではありますが、macOS / Linux の両方で動作する CLI ツール「ghostty-pane-splitter」を Rust で作ったので紹介します。
 
 https://github.com/rikeda71/ghostty-pane-splitter
 
@@ -61,7 +61,7 @@ sudo mv ghostty-pane-splitter /usr/local/bin/
 - `goto_split:previous`
 - `equalize_splits`
 
-キーの組み合わせは任意で構いません。設定の詳細は [Ghostty のキーバインドリファレンス](https://ghostty.org/docs/config/keybind/reference)を参照してください。以下は設定例です。
+キーの組み合わせは任意で構いません。設定の詳細は [Ghostty のキーバインドリファレンス](https://ghostty.org/docs/config/keybind/reference) を参照してください。以下は設定例です。
 
 ```
 keybind = super+d=new_split:right
@@ -88,17 +88,17 @@ Ghostty の設定ファイルは以下のパスにあります。
 ghostty-pane-splitter <LAYOUT>
 ```
 
-`<LAYOUT>` にはpane数、グリッド指定（`列x行`）、またはカスタム列レイアウト（カンマ区切りで各列の行数を指定）を渡します。
+`<LAYOUT>` には pane 数、グリッド指定（`列x行`）、またはカスタム列レイアウト（カンマ区切りで各列の行数を指定）を渡します。
 
 #### 数値指定
 
-pane数を数値で指定すると、自動的にグリッドレイアウトを計算して分割します。
+pane 数を数値で指定すると、自動的にグリッドレイアウトを計算して分割します。
 
 ```bash
-# 4paneに分割 (2x2 グリッド)
+# 4 pane に分割 (2x2 グリッド)
 ghostty-pane-splitter 4
 
-# 9paneに分割 (3x3 グリッド)
+# 9 pane に分割 (3x3 グリッド)
 ghostty-pane-splitter 9
 ```
 
@@ -125,13 +125,13 @@ ghostty-pane-splitter 2,1,3
 
 ## 実装について
 
-ghostty-pane-splitter は [enigo](https://github.com/enigo-rs/enigo) というクレートを使ってキーボード入力をシミュレートし、Ghostty のpane分割を自動化しています。
+ghostty-pane-splitter は [enigo](https://github.com/enigo-rs/enigo) というクレートを使ってキーボード入力をシミュレートし、Ghostty の pane 分割を自動化しています。
 
 https://github.com/enigo-rs/enigo
 
 処理の流れは以下の通りです。
 
-1. Ghostty の設定ファイルを読み取り、pane分割に必要なキーバインドを取得する
+1. Ghostty の設定ファイルを読み取り、pane 分割に必要なキーバインドを取得する
 2. 指定されたレイアウトに応じて必要な分割操作の順序を計算する
 3. enigo を通じてキーボード入力をシミュレートし、Ghostty のキーバインドを順番に発火させる
 
@@ -143,7 +143,7 @@ Windows は Ghostty 自体が未サポートのため、ghostty-pane-splitter �
 
 ## 終わりに
 
-Ghostty のpane分割を CLI で自動化するツール ghostty-pane-splitter を紹介しました。よければご利用ください！
+Ghostty の pane 分割を CLI で自動化するツール ghostty-pane-splitter を紹介しました。よければご利用ください！
 
 star や PR、Issue などもお待ちしています。
 
