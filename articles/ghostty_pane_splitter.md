@@ -135,13 +135,15 @@ ghostty-pane-splitter 2,1,3
 
 ghostty-pane-splitter は [enigo](https://github.com/enigo-rs/enigo) というクレートを使ってキーボード入力をシミュレートし、Ghostty のpane分割を自動化しています。
 
+https://github.com/enigo-rs/enigo
+
 処理の流れは以下の通りです。
 
 1. Ghostty の設定ファイルを読み取り、pane分割に必要なキーバインドを取得する
 2. 指定されたレイアウトに応じて必要な分割操作の順序を計算する
 3. enigo を通じてキーボード入力をシミュレートし、Ghostty のキーバインドを順番に発火させる
 
-enigo は macOS では Core Graphics Event API、Linux では X11 (libxdo) を利用してキーストロークを送信します。このクレートが OS ごとの差異を吸収してくれるため、同一のコードベースで macOS / Linux の両方に対応できています。
+enigo は macOS では [Core Graphics Event API](https://developer.apple.com/documentation/coregraphics/cgevent)、Linux では [libxdo (xdotool)](https://github.com/jordansissel/xdotool) を利用してキーストロークを送信します。このクレートが OS ごとの差異を吸収してくれるため、同一のコードベースで macOS / Linux の両方に対応できています。
 
 :::message
 Windows は Ghostty 自体が未サポートのため、ghostty-pane-splitter も Windows には対応していません。
