@@ -85,7 +85,7 @@ Ghostty の設定ファイルは以下のパスにあります。
 
 ### レイアウト指定
 
-```
+```bash
 ghostty-pane-splitter <LAYOUT>
 ```
 
