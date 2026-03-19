@@ -2,7 +2,7 @@
 title: "Ghostty の pane 分割をコマンド一発で自動化する CLI ツールを作った"
 emoji: "👻"
 type: "tech"
-topics: ["ghostty", "rust", "cli", "terminal"]
+topics: ["ghostty", "rust", "cli", "terminal","claudecode"]
 published: true
 published_at: 2026-03-19 07:00
 ---
